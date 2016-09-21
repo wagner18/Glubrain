@@ -80,13 +80,13 @@ class MainViewControllerStylesheet < ApplicationStylesheet
   end
 
   def translate_button(st)
-    st.frame = {l: @screen[:width] / 2 - 17.5, top: st.prev_frame.y + st.prev_frame.height - 17.5, w: 35, h: 35}
+    st.frame = {l: @screen[:width] - 45, top: st.prev_frame.y + st.prev_frame.height - 17.5, w: 35, h: 35}
     st.z_position = 99
     st.corner_radius = 17.5
-    st.content_vertical_alignment = UIControlContentVerticalAlignmentCenter
+    #st.content_vertical_alignment = UIControlContentVerticalAlignmentCenter
     st.background_color = color.default_blue
     st.color = color.black
-    st.image_normal = icon_image(:ion, :ios_arrow_thin_down, size: 32, color: color.white)
+    st.image_normal = icon_image(:ion, :ios_arrow_thin_down, size: 35, color: color.white)
     st.image_highlighted = icon_image(:ion, :ios_arrow_thin_down, size: 32, color: color.black)
   end
 

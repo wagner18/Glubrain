@@ -43,7 +43,9 @@ class MainView < UIView
 
 
         # Hold the result from the translation options if there is some.
-        @result_options = rmq_self.append(UITextView, :result_options).tag(:main_form).get
+        @result_options = rmq_self.append(UITextView, :result_options).tag(:main_form)
+        @result_options.hide
+        @result_options = @result_options.get
 
 
         #Buttons layer

@@ -159,36 +159,52 @@ class MainViewController < UIViewController
     text = source_field.text
     @to_translate_text = text ? text.gsub(/\s/, "%20") : nil
 
+    # Hide the keybord after the user touch the botton translate
+    source_field.resignFirstResponder
+
     if !@to_translate_text.nil? && !@to_translate_text.empty?
 
       client_translator = MicrosoftTranslator::Client.new()
-      res = client_translator.translate(@to_translate_text, @trans_from, @trans_to) do |result|
-        translate_result = result.to_str.scan(/>(.+?)<\/string>/).first[0]
-        rmq(:result_field).get.text = translate_result
+      res = client_translator.alternative_translation(@to_translate_text, @trans_from, @trans_to) do |response|
+
+        #translate_result = response.to_str.scan(/>(.+?)<\/string>/).first[0]
+        result_field = rmq(:result_field).get
+
+        translate_result = BW::JSON.parse(response.object)
+
+        first_return = translate_result["Translations"][0]
+        result_field.text = first_return["TranslatedText"]
 
         #set the alternative translation to the container
-        set_alternative_translation(rmq(:result_options).get, text)
+        result_options = rmq(:result_options)
+        if translate_result["Translations"].length > 1
 
-        source_field.resignFirstResponder
+          set_alternative_translation(result_options.get, text, translate_result["Translations"])
+          result_options.show
+        else
+          result_options.hide
+        end
+
       end
 
     end
-
   end
 
-  def set_alternative_translation(container, text)
-    container.text = "Alternative Translation: #{text}
+  # Set the alternatice tralsation if exist
+  def set_alternative_translation(container, text, alternatives_text)
 
-        #{text}: All the options has to be in here!! 
-        #{text}: One more exemple
-        #{text}: now one more here too
-        #{text}: that's it, one more than
-        #{text}: ok, this is the last one
-        #{text}: ok, this is the last one
-        #{text}: ok, this is the last one
-        #{text}: ok, this is the last one
-        #{text}: ok, this is the last one
-        #{text}: ok, this is the last one"
+    alternatives_text.delete_at(0)
+
+    puts alternatives_text.inspect
+
+    text_result = "Alternative Translation for : #{text}
+    "
+    alternatives_text.each do |txt|
+      text_result += "
+      #{text}: #{txt['TranslatedText']}"
+    end
+
+    container.text = text_result
 
   end
 

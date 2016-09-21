@@ -52,40 +52,28 @@ module MicrosoftTranslator
       #puts "Result of the translation is #{@result}"
     end
 
+    #http://api.microsofttranslator.com/V2/Ajax.svc/GetTranslations?appId=31C738345474CF52FD6F313331A7B00837031F17&text=either%20I&from=en&to=pt&maxTranslations=5
     # Method to retrieves an array of translations for a given language pair from the store and the MT engine
     def alternative_translation(text, from_lang, to_lang, &block)
 
-      path_url = "/V2/Http.svc/GetTranslations"
+      trans_url = "http://api.microsofttranslator.com"
+      trans_path = "/V2/Ajax.svc/GetTranslations?text=#{text}&from=#{from_lang}&to=#{to_lang}&maxTranslations=5"
 
-      params =  {
-        text: text,
-        from: from,
-        to: to,
-        maxTranslations: 10
-      }
+      client = set_client(trans_url, :http)
 
-      client = set_client("http://api.microsofttranslator.com", :http)
+      client.headers["Content-Type"] = "application/json"#text/plain"
+      client.headers["Accept"] = "application/json"#text/plain"
 
-      client.post(path_url, params) do |response|
+      client.post(trans_path) do |response|
 
         if response.success?
-          block.call(response.object)
+          block.call(response)
         else
           puts response.error.localizedDescription.inspect
           App.alert("Something wrong tranlating the text: #{text}")
         end
 
       end
-
-      # AFMotion::HTTP.post(path_url, params) do |result|
-
-      #   if result.success?
-      #     json = BW::JSON.parse(result.body)
-      #     block.call(json)
-      #   else
-      #     App.alert("Something wrong with the access token")
-      #   end
-      # end
 
     end
 
@@ -161,9 +149,7 @@ module MicrosoftTranslator
       return client
     end
 
-    def base_params
-      {:Authorization => "Bearer #{@auth.current_token}"}
-    end
+
 
     def translate_params(text, from_lang, to_lang, content_type)
       hash = base_params
