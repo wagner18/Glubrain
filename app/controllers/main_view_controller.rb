@@ -4,10 +4,13 @@ class MainViewController < UIViewController
 
   def initWithNibName(name, bundle: bundle) 
     super
-    self.tabBarItem = UITabBarItem.alloc.initWithTitle(
-      "Translator", 
-      image: icon_image(:awesome, :globe, size: 28), 
-      tag: 1)
+
+    rmq.stylesheet = MainViewControllerStylesheet
+    rmq(self.view).apply_style :root_view
+
+    icon = icon_image(:awesome, :globe, size: 24)
+
+    self.tabBarItem = UITabBarItem.alloc.initWithTitle("Translator", image: icon, tag: 1)
     self
   end
 
@@ -19,10 +22,7 @@ class MainViewController < UIViewController
   def viewDidLoad
     super
 
-    rmq.stylesheet = MainViewControllerStylesheet
-    rmq(self.view).apply_style :root_view
-
-    init_navigation
+    #init_navigation
 
     @main_view = MainView.new
     @main_view.delegate = self
@@ -150,7 +150,6 @@ class MainViewController < UIViewController
 
   end
 
-
   # Translate the given text using Mycrosoft API and AFMotion
   def translate
 
@@ -167,7 +166,6 @@ class MainViewController < UIViewController
       client_translator = MicrosoftTranslator::Client.new()
       res = client_translator.alternative_translation(@to_translate_text, @trans_from, @trans_to) do |response|
 
-        #translate_result = response.to_str.scan(/>(.+?)<\/string>/).first[0]
         result_field = rmq(:result_field).get
 
         translate_result = BW::JSON.parse(response.object)
@@ -175,15 +173,20 @@ class MainViewController < UIViewController
         first_return = translate_result["Translations"][0]
         result_field.text = first_return["TranslatedText"]
 
-        #set the alternative translation to the container
-        result_options = rmq(:result_options)
-        if translate_result["Translations"].length > 1
+        # Set the alternative translation to the container
+        # result_options = rmq(:result_options)
+        # if translate_result["Translations"].length > 1
 
-          set_alternative_translation(result_options.get, text, translate_result["Translations"])
-          result_options.show
-        else
-          result_options.hide
-        end
+        #   set_alternative_translation(result_options.get, text, translate_result["Translations"])
+        #   result_options.show
+        # else
+        #   result_options.hide
+        # end
+
+        puts first_return.inspect
+
+        # Get images of the subject through the web
+        search_image(text)
 
       end
 
@@ -227,25 +230,26 @@ class MainViewController < UIViewController
       end
   end
 
+
   def search_image(query)
-    
     if query && (query != '')
 
       query = query.gsub(/\s/, '%20')
-      url = "https://translate.google.com/?hl=en&tab=wT#en/pt/#{query}"
-      #url = "https://secure.flickr.com/search/?q=#{query}&s=int"
+      url = "https://secure.flickr.com/search/?q=#{query}&s=int"
 
       rmq.animations.start_spinner
+
       BW::HTTP.get(url) do |result|
 
         if result.body
-          html = result.body.to_str
-          images = html.scan(/<span id="result_box"(.*)<\/span>/).map do |img|
-            img
-          end
 
-          html.scan(/carro(.*?)\/span>/).map do |r|
-            puts r.first
+          html = result.body.to_str
+
+          #url("//c8.staticflickr.com/3/2365/2385191991_53e2ed8af9.jpg")
+          #https://www.google.com/search?q=carros&tbm=isch
+
+          images = html.scan(/url\((.+?\.jpg)\)/).map do |img|
+            img.first
           end
 
           open_images_controller(images) if images.length > 0
@@ -254,15 +258,20 @@ class MainViewController < UIViewController
 
       end
     end
-
   end
 
 
   def open_images_controller(images)
-    controller = ImagesController.new
-    controller.images_urls = images
-    controller.title = @search_field.text
-    self.navigationController.pushViewController(controller, animated:true)
+
+    image_conteiner = rmq(:image_conteiner)
+    image_conteiner.show
+    image_conteiner = image_conteiner.get
+
+    collection_view = ImagesView.alloc.initWithFrame(CGRectMake(0,0, image_conteiner.frame.size.width, image_conteiner.frame.size.height))
+    collection_view.images_urls = images
+
+    image_conteiner.addSubview(collection_view)
+    #self.navigationController.pushViewController(controller, animated:true)
   end
 
 

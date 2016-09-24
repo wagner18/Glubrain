@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rake'
-gem 'json', '~> 2.0.0'
+#gem 'json', '~> 2.0.0'
 gem 'bubble-wrap'
 gem 'bubble-wrap-http'
 gem 'afmotion'

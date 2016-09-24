@@ -6,11 +6,14 @@ require 'motion/project/template/ios'
 require 'bundler'
 Bundler.require
 
-require 'json'
+#require 'json'
 require 'bubble-wrap'
 require 'bubble-wrap/media'
 require 'afmotion'
 require 'ruby_motion_query'
+
+#design dependences
+require 'moticons'
 
 Motion::Project::App.setup do |app|
 
@@ -26,7 +29,7 @@ Motion::Project::App.setup do |app|
   app.icons = ["icon@2x.png", "icon-29@2x.png", "icon-40@2x.png", "icon-60@2x.png", "icon-76@2x.png", "icon-512@2x.png"]
 
   # prerendered_icon is only needed in iOS 6
-  #app.prerendered_icon = true
+  app.prerendered_icon = true
 
   app.device_family = [:iphone, :ipad]
   app.interface_orientations = [:portrait]#, :landscape_left, :landscape_right, :portrait_upside_down]
@@ -62,16 +65,16 @@ Motion::Project::App.setup do |app|
   app.development do
 
     # To live code reloading - Take off to release
-    app.info_plist["ProjectRootPath"] = File.dirname(__FILE__)
+    #app.info_plist["ProjectRootPath"] = File.dirname(__FILE__)
 
-    # app.codesign_certificate = "iPhone Developer: Wagner Borba"
-    # app.provisioning_profile = "com.wagnerborba.testprofile.Gluebrain"
+    #app.codesign_certificate = "iOS Developer: Wagner Borba"
+    app.provisioning_profile = "/Users/wagner/Library/MobileDevice/Provisioning Profiles/e191fbdc-6b60-402e-b6b6-aaa9ec49f3d0.mobileprovision"
   end
 
   app.release do
     app.entitlements['get-task-allow'] = false
-    #app.codesign_certificate = 'iPhone Distribution: YOURNAME'
-    #app.provisioning_profile = "signing/com.wagnerborba.testprofile.Gluebrain"
+    app.codesign_certificate = 'iPhone Distribution: YOURNAME'
+    app.provisioning_profile = "signing/com.wagnerborba.testprofile.Gluebrain"
     app.seed_id = "YOUR_SEED_ID"
     app.entitlements['application-identifier'] = app.seed_id + '.' + app.identifier
     app.entitlements['keychain-access-groups'] = [ app.seed_id + '.' + app.identifier ]

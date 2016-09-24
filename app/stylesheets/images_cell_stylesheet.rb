@@ -1,7 +1,7 @@
 module ImagesCellStylesheet
 
   def cell_size
-    {w: 83, h: 83}
+    {w: 125, h: 125}
   end
 
   def images_cell(st)

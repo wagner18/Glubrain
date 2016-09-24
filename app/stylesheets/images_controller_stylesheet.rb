@@ -12,6 +12,7 @@ class ImagesControllerStylesheet < ApplicationStylesheet
   def collection_view(st)
     st.view.contentInset = [0, 0, 0, 0]
     st.background_color = color.white
+    st.opacity = 1.0
 
     st.view.collectionViewLayout.tap do |cl|
       cl.itemSize = [cell_size[:w], cell_size[:h]]

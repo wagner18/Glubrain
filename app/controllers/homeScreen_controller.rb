@@ -10,7 +10,7 @@ class HomescreenController < UITableViewController
     self.tabBarItem =
       UITabBarItem.alloc.initWithTitle(
         "List",
-        image: icon_image(:awesome, :bars, size: 28), 
+        image: icon_image(:awesome, :bars, size: 24), 
         tag: 1)
     self
   end

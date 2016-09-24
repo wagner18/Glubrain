@@ -18,8 +18,6 @@ class ImagesCell < UICollectionViewCell
 
   def update(image_url)
 
-    puts image_url
-
     #obj_image = UIImage.imageWithContentsOfFile(NSURL.URLWithString(image_url))
     #@image.setImageWithURL(image_url && NSURL.URLWithString(image_url))
     @image.url = "https:#{image_url}"

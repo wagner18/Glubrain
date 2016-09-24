@@ -38,6 +38,7 @@ class ApplicationStylesheet < RubyMotionQuery::Stylesheet
 
     color.add_named :translucent_black, color.from_rgba(0, 0, 0, 0.6)
     color.add_named :translucent_white, color(hex: 'fff', a: 0.70)
+    color.add_named :translucent_background, color(hex: 'fff', a: 0.40)
     color.add_named :battleship_gray,   '#7F7F7F'
 
     # Set other application-wide visual things, such as appearances:
@@ -72,6 +73,10 @@ class ApplicationStylesheet < RubyMotionQuery::Stylesheet
     st.background_color = color.gray
     st.color = color.white
     st.enabled = false
+  end
+
+  def standard_form(st)
+    st.opacity = 0.60
   end
 
   def shadow(st)

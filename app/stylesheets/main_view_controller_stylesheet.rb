@@ -5,7 +5,6 @@ class MainViewControllerStylesheet < ApplicationStylesheet
   def setup
     # Add stylesheet specific setup stuff here.
     # Add application specific setup stuff in application_stylesheet.rb
-
     @screen = {
       :width => rmq.device.width,
       :height => rmq.device.height
@@ -22,11 +21,16 @@ class MainViewControllerStylesheet < ApplicationStylesheet
   end
 
   def main_view(st)
-     st.background_color = color.translucent_white
-     st.opacity = 0.60
+     st.background_color = color.translucent_background
+     #st.background_image = image.resource('opacBackground_1242x2208.png')
+     #st.opacity = 0.60
+     #st.rotation = 25
   end
 
   def from_button(st)
+
+    standard_form(st)
+
     st.frame = {l: 0, top: 64, w: @screen[:width] / 2 - 22, h: 40}
     st.content_vertical_alignment = UIControlContentVerticalAlignmentCenter
     st.background_color = color.default_blue#color.white
@@ -38,6 +42,7 @@ class MainViewControllerStylesheet < ApplicationStylesheet
   end
 
   def swap_button(st)
+    standard_form(st)
 
     st.frame = {l: st.prev_frame.width, top: 64, w: 44, h: 40}
     st.content_vertical_alignment = UIControlContentVerticalAlignmentCenter
@@ -51,6 +56,8 @@ class MainViewControllerStylesheet < ApplicationStylesheet
   end
 
   def to_button(st)
+    standard_form(st)
+
     st.frame = {l: @screen[:width] / 2 + 22, top: 64, w: @screen[:width] / 2 - 22, h: 40}
     st.content_vertical_alignment = UIControlContentVerticalAlignmentCenter
     st.background_color = color.default_blue#color.white
@@ -62,6 +69,8 @@ class MainViewControllerStylesheet < ApplicationStylesheet
   end
 
   def source_field(st)
+    standard_form(st)
+
     st.frame = {left: 0, top: 105, w: @screen[:width], h: 90}
     st.corner_radius = 0
     st.z_position = 10
@@ -80,6 +89,7 @@ class MainViewControllerStylesheet < ApplicationStylesheet
   end
 
   def translate_button(st)
+
     st.frame = {l: @screen[:width] - 45, top: st.prev_frame.y + st.prev_frame.height - 17.5, w: 35, h: 35}
     st.z_position = 99
     st.corner_radius = 17.5
@@ -91,6 +101,8 @@ class MainViewControllerStylesheet < ApplicationStylesheet
   end
 
   def result_field(st)
+    standard_form(st)
+
     st.frame = {left: 0, top: st.prev_frame.y + st.prev_frame.height - 17, w: @screen[:width], h: 130}
     st.z_position = 9
     st.font = font.standard
@@ -101,6 +113,8 @@ class MainViewControllerStylesheet < ApplicationStylesheet
   end
 
   def result_options(st)
+    standard_form(st)
+
     st.frame = {left: 0, top: st.prev_frame.y + st.prev_frame.height + 4, w: @screen[:width], h: 130}
     st.corner_radius = 8
     st.background_color = color.white
@@ -111,7 +125,19 @@ class MainViewControllerStylesheet < ApplicationStylesheet
     #st.border_style = UITextBorderStyleRoundedRect
   end
 
+
+  def image_conteiner(st)
+
+    st.frame = {left: 0, top: st.prev_frame.y + st.prev_frame.height + 1, w: @screen[:width], h: 210}
+    st.background_color = color.white
+    st.z_position= 99
+    #st.content_size = CGSizeMake(@screen[:width], 1160);
+  end
+
+
   def cam_button(st)
+    standard_form(st)
+
     st.frame = {left: 5, top: st.prev_frame.y + st.prev_frame.height + 5, w: @screen[:width] / 2 - 10, height: 30}
     st.background_color = color.l_blue
     st.color = color.black
@@ -127,6 +153,8 @@ class MainViewControllerStylesheet < ApplicationStylesheet
   end
 
   def mic_button(st)
+    standard_form(st)
+
     st.frame = {left: @screen[:width] / 2 + 5, top: st.prev_frame.y, w: @screen[:width] / 2 - 10, height: 30}
     st.background_color = color.l_blue
     st.color = color.black
@@ -134,6 +162,8 @@ class MainViewControllerStylesheet < ApplicationStylesheet
   end
   
   def scadule_button(st)
+    standard_form(st)
+
     st.frame = {left: 5, top: @screen[:height] - 84, w: @screen[:width] - 10, height: 30}
     st.background_color = color.l_blue
     st.color = color.black
