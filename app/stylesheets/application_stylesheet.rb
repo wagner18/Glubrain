@@ -80,7 +80,8 @@ class ApplicationStylesheet < RubyMotionQuery::Stylesheet
   end
 
   def shadow(st)
-    st.clips_to_bounds = false
+    st.clips_to_bounds = true
+
     st.view.layer.tap do |l|
       l.shadowColor = color.black.CGColor
       l.shadowOpacity = 0.2

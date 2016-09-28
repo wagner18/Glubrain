@@ -23,6 +23,7 @@ class MainViewController < UIViewController
     super
 
     #init_navigation
+    self.title = 'Translator'
 
     @main_view = MainView.new
     @main_view.delegate = self

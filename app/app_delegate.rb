@@ -1,3 +1,11 @@
+# //
+# //  AppDelegate.rb
+# //  Gluebrain
+# //
+# //  Created by WAGNER BORBA on 9/16/16.
+# //  Copyright © 2016 WAGNER BORBA. All rights reserved.
+# //
+
 class AppDelegate
   attr_reader :window
 

@@ -71,7 +71,7 @@ class MainViewControllerStylesheet < ApplicationStylesheet
   def source_field(st)
     standard_form(st)
 
-    st.frame = {left: 0, top: 105, w: @screen[:width], h: 90}
+    st.frame = {left: 10, top: 110, w: @screen[:width] - 20, h: 90}
     st.corner_radius = 0
     st.z_position = 10
     #st.scroll_enabled = false
@@ -85,14 +85,14 @@ class MainViewControllerStylesheet < ApplicationStylesheet
     st.spell_checking_type = UITextSpellCheckingTypeYes
     st.autocapitalization_type = UITextAutocapitalizationTypeSentences
     st.content_size = CGSizeMake(@screen[:width], 70)
-    # shadow(st)
+    shadow(st)
   end
 
   def translate_button(st)
 
-    st.frame = {l: @screen[:width] - 45, top: st.prev_frame.y + st.prev_frame.height - 17.5, w: 35, h: 35}
+    st.frame = {l: @screen[:width] - 45, top: st.prev_frame.y + (st.prev_frame.height / 2), w: 35, h: st.prev_frame.height / 2}
     st.z_position = 99
-    st.corner_radius = 17.5
+    st.corner_radius = 0 #17.5
     #st.content_vertical_alignment = UIControlContentVerticalAlignmentCenter
     st.background_color = color.default_blue
     st.color = color.black
@@ -103,7 +103,7 @@ class MainViewControllerStylesheet < ApplicationStylesheet
   def result_field(st)
     standard_form(st)
 
-    st.frame = {left: 0, top: st.prev_frame.y + st.prev_frame.height - 17, w: @screen[:width], h: 130}
+    st.frame = {left: 10, top: st.prev_frame.y + st.prev_frame.height + 10, w: @screen[:width] - 20, h: 130}
     st.z_position = 9
     st.font = font.standard
     st.background_color = color.white
@@ -115,7 +115,7 @@ class MainViewControllerStylesheet < ApplicationStylesheet
   def result_options(st)
     standard_form(st)
 
-    st.frame = {left: 0, top: st.prev_frame.y + st.prev_frame.height + 4, w: @screen[:width], h: 130}
+    st.frame = {left: 0, top: st.prev_frame.y + st.prev_frame.height + 10, w: @screen[:width], h: 130}
     st.corner_radius = 8
     st.background_color = color.white
     st.editable = false
@@ -128,7 +128,7 @@ class MainViewControllerStylesheet < ApplicationStylesheet
 
   def image_conteiner(st)
 
-    st.frame = {left: 0, top: st.prev_frame.y + st.prev_frame.height + 1, w: @screen[:width], h: 210}
+    st.frame = {left: 0, top: st.prev_frame.y + st.prev_frame.height + 10, w: @screen[:width], h: 220}
     st.background_color = color.white
     st.z_position= 99
     #st.content_size = CGSizeMake(@screen[:width], 1160);
@@ -137,37 +137,36 @@ class MainViewControllerStylesheet < ApplicationStylesheet
 
   def cam_button(st)
     standard_form(st)
+    shadow(st)
 
-    st.frame = {left: 5, top: st.prev_frame.y + st.prev_frame.height + 5, w: @screen[:width] / 2 - 10, height: 30}
-    st.background_color = color.l_blue
-    st.color = color.black
+    st.frame = {left: 10, top: st.prev_frame.y + st.prev_frame.height + 10, w: @screen[:width] / 3 - 10, height: 30}
+    st.background_color = color.default_blue
+    st.color = color.white
     st.text = "Camera"
+    st.font = font.small
 
-    st.clips_to_bounds = false
-    st.view.layer.tap do |l|
-      l.shadowColor = color.black.CGColor
-      l.shadowOpacity = 0.2
-      l.shadowRadius = 1.5
-      l.shadowOffset = [0.5, 1.5]
-    end
   end
 
   def mic_button(st)
     standard_form(st)
+    shadow(st)
 
-    st.frame = {left: @screen[:width] / 2 + 5, top: st.prev_frame.y, w: @screen[:width] / 2 - 10, height: 30}
-    st.background_color = color.l_blue
-    st.color = color.black
+    st.frame = {left: st.prev_frame.x + st.prev_frame.width + 10, top: st.prev_frame.y, w: @screen[:width] / 3 - 10, height: 30}
+    st.background_color = color.default_blue
+    st.color = color.white
     st.text = "Microphone"
+    st.font = font.small
   end
   
   def scadule_button(st)
     standard_form(st)
+    shadow(st)
 
-    st.frame = {left: 5, top: @screen[:height] - 84, w: @screen[:width] - 10, height: 30}
-    st.background_color = color.l_blue
-    st.color = color.black
+    st.frame = {left: st.prev_frame.x + st.prev_frame.width + 10, top: st.prev_frame.y, w: @screen[:width] / 3 - 20, height: 30}
+    st.background_color = color.default_blue
+    st.color = color.white
     st.text = "Scadule"
+    st.font = font.small
   end
 
 end

@@ -14,6 +14,14 @@ class FlashCardsController < UIViewController
 
   def viewDidLoad
 
+    self.title = "Flashcards"
+
+    @flash_cards_view = FlashCardsView.new
+    @flash_cards_view.delegate = self
+
+    rmq.append(@flash_cards_view)
+
+    #resignFirstResponder
 
   end
 
