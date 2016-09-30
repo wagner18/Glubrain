@@ -10,7 +10,9 @@ Bundler.require
 require 'bubble-wrap'
 require 'bubble-wrap/media'
 require 'afmotion'
-require 'ruby_motion_query'
+#require 'ProMotion'
+require 'ProMotion-XLForm'
+#require 'ruby_motion_query'
 
 #design dependences
 require 'moticons'
@@ -32,7 +34,7 @@ Motion::Project::App.setup do |app|
   app.prerendered_icon = true
 
   app.device_family = [:iphone, :ipad]
-  app.interface_orientations = [:portrait]#, :landscape_left, :landscape_right, :portrait_upside_down]
+  app.interface_orientations = [:portrait, :landscape_left, :landscape_right, :portrait_upside_down]
 
   app.files += Dir.glob(File.join(app.project_dir, 'lib/**/*.rb'))
 
@@ -68,7 +70,7 @@ Motion::Project::App.setup do |app|
     #app.info_plist["ProjectRootPath"] = File.dirname(__FILE__)
 
     #app.codesign_certificate = "iOS Developer: Wagner Borba"
-    app.provisioning_profile = "/Users/wagner/Library/MobileDevice/Provisioning Profiles/e191fbdc-6b60-402e-b6b6-aaa9ec49f3d0.mobileprovision"
+    app.provisioning_profile = "/Users/wagner/Library/MobileDevice/Provisioning Profiles/fd40bcc1-31da-4801-a244-7132c35f975e.mobileprovision"
   end
 
   app.release do

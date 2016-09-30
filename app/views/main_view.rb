@@ -61,8 +61,8 @@ class MainView < UIView
           media_picker
         end
 
-        rmq_self.append(UIButton, :scadule_button).tag(:main_form).on(:touch) do |sender|
-          search_image(@subject_field.text)
+        rmq_self.append(UIButton, :schedule_button).tag(:main_form).on(:touch) do |sender|
+          schedule_flashcard
         end
 
     end
@@ -112,6 +112,13 @@ class MainView < UIView
             self.delegate.media_picker
         end
     end
+
+    def schedule_flashcard
+        if self.delegate.respond_to?("schedule_flashcard")
+            self.delegate.schedule_flashcard
+        end
+    end
+
 
 end
 

@@ -35,17 +35,32 @@ PODS:
     - FontAwesomeKit/Core
   - FontAwesomeKit/Zocial (2.2.0):
     - FontAwesomeKit/Core
+  - RSColorPicker (0.9.2)
+  - XLForm (3.2.0)
 
 DEPENDENCIES:
   - AFNetworking
   - AFNetworking (~> 2.5.0)
   - FontAwesomeKit
   - FontAwesomeKit (~> 2.2)
+  - RSColorPicker
+  - XLForm (from `https://github.com/xmartlabs/XLForm.git`)
+
+EXTERNAL SOURCES:
+  XLForm:
+    :git: https://github.com/xmartlabs/XLForm.git
+
+CHECKOUT OPTIONS:
+  XLForm:
+    :commit: bb81e88572d1d977557dc186f725e30ebf474235
+    :git: https://github.com/xmartlabs/XLForm.git
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   FontAwesomeKit: 025fd4dd1017fe4e3f8d47b03e024deedbb33cd4
+  RSColorPicker: 4d71e12f8e28d44c3885fbb3ba10bc3627bdb393
+  XLForm: 2250b4e96ab8ffa5f3355838c79edd90de451782
 
-PODFILE CHECKSUM: 8ea4fd067aa48570b3bb9302daf676e5c2088f01
+PODFILE CHECKSUM: 7f7d4cfc1a6be5acc51b16e137405099d78a6c99
 
 COCOAPODS: 1.0.1

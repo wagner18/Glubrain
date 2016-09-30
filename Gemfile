@@ -4,12 +4,17 @@ gem 'rake'
 #gem 'json', '~> 2.0.0'
 gem 'bubble-wrap'
 gem 'bubble-wrap-http'
+
+gem 'redpotion'
+
 gem 'afmotion'
-gem 'ruby_motion_query'
+#gem 'ProMotion', '~> 2.5'
+gem 'ProMotion-XLForm'
+#gem 'ruby_motion_query'
 
 gem 'moticons'
 
-gem 'newclear'
+#gem 'newclear'
 
 # Pretty printing
 #gem 'motion_print' 

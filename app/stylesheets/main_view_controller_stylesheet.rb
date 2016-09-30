@@ -71,7 +71,7 @@ class MainViewControllerStylesheet < ApplicationStylesheet
   def source_field(st)
     standard_form(st)
 
-    st.frame = {left: 10, top: 110, w: @screen[:width] - 20, h: 90}
+    st.frame = {left: 10, top: 110, from_right: 10, h: 90}
     st.corner_radius = 0
     st.z_position = 10
     #st.scroll_enabled = false
@@ -103,7 +103,7 @@ class MainViewControllerStylesheet < ApplicationStylesheet
   def result_field(st)
     standard_form(st)
 
-    st.frame = {left: 10, top: st.prev_frame.y + st.prev_frame.height + 10, w: @screen[:width] - 20, h: 130}
+    st.frame = {left: 10, from_right: 10, below_prev: 10, h: 130}
     st.z_position = 9
     st.font = font.standard
     st.background_color = color.white
@@ -158,7 +158,7 @@ class MainViewControllerStylesheet < ApplicationStylesheet
     st.font = font.small
   end
   
-  def scadule_button(st)
+  def schedule_button(st)
     standard_form(st)
     shadow(st)
 

@@ -275,14 +275,11 @@ class MainViewController < UIViewController
     #self.navigationController.pushViewController(controller, animated:true)
   end
 
+  def schedule_flashcard
+    test_screen = TestFormScreen.new(nav_bar: true)
+    self.navigationController.pushViewController(test_screen, animated:true)
+  end
 
-  # def nav_left_button
-  #   puts 'Left button'
-  # end
-
-  # def nav_right_button
-  #   puts 'Right button'
-  # end
 
   # # Remove these if you are only supporting portrait
   # def supportedInterfaceOrientations
