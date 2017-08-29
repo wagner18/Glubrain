@@ -13,6 +13,7 @@ require 'afmotion'
 #require 'ProMotion'
 require 'ProMotion-XLForm'
 #require 'ruby_motion_query'
+#require 'cdq'
 
 #design dependences
 require 'moticons'
@@ -25,8 +26,8 @@ Motion::Project::App.setup do |app|
   app.version = app.short_version
 
   # SDK 8 for iOS 8 and above
-  #app.sdk_version = '8.4'
-  #app.deployment_target = '9.3'
+  app.deployment_target = '10.2'
+  app.sdk_version = "10.2"
 
   app.icons = ["icon@2x.png", "icon-29@2x.png", "icon-40@2x.png", "icon-60@2x.png", "icon-76@2x.png", "icon-512@2x.png"]
 
@@ -70,7 +71,7 @@ Motion::Project::App.setup do |app|
     #app.info_plist["ProjectRootPath"] = File.dirname(__FILE__)
 
     #app.codesign_certificate = "iOS Developer: Wagner Borba"
-    app.provisioning_profile = "/Users/wagner/Library/MobileDevice/Provisioning Profiles/fd40bcc1-31da-4801-a244-7132c35f975e.mobileprovision"
+    app.provisioning_profile = "/Users/wagner/Library/MobileDevice/Provisioning Profiles/604dff93-0c28-4f4d-9c01-7c1c27ce9cfd.mobileprovision"
   end
 
   app.release do
@@ -89,3 +90,4 @@ Motion::Project::App.setup do |app|
   puts "Using certificate: #{app.codesign_certificate}"
 
 end
+task :"build:simulator" => :"schema:build"

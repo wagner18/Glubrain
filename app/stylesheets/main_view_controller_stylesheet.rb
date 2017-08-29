@@ -71,7 +71,7 @@ class MainViewControllerStylesheet < ApplicationStylesheet
   def source_field(st)
     standard_form(st)
 
-    st.frame = {left: 10, top: 110, from_right: 10, h: 90}
+    st.frame = {left: 10, top: 110, from_right: 10, h: 70}
     st.corner_radius = 0
     st.z_position = 10
     #st.scroll_enabled = false
@@ -88,22 +88,35 @@ class MainViewControllerStylesheet < ApplicationStylesheet
     shadow(st)
   end
 
-  def translate_button(st)
-
-    st.frame = {l: @screen[:width] - 45, top: st.prev_frame.y + (st.prev_frame.height / 2), w: 35, h: st.prev_frame.height / 2}
+  def clear_button(st)
+    st.frame = {l: @screen[:width] - 45, top: st.prev_frame.y, w: 35, h: st.prev_frame.height / 2}
     st.z_position = 99
     st.corner_radius = 0 #17.5
     #st.content_vertical_alignment = UIControlContentVerticalAlignmentCenter
-    st.background_color = color.default_blue
+    #st.background_color = color.default_blue
     st.color = color.black
-    st.image_normal = icon_image(:ion, :ios_arrow_thin_down, size: 35, color: color.white)
-    st.image_highlighted = icon_image(:ion, :ios_arrow_thin_down, size: 32, color: color.black)
+    st.text = "X"
+    st.image_normal = icon_image(:ion, :ios_close_empty, size: 35, color: color.black)
+    st.image_highlighted = icon_image(:ion, :ios_close_empty, size: 35, color: color.black)
   end
+
+  def translate_button(st)
+    st.frame = {l: @screen[:width] - 45, top: st.prev_frame.y + st.prev_frame.height, w: 35, h: st.prev_frame.height}
+    st.z_position = 99
+    st.corner_radius = 0 #17.5
+    #st.content_vertical_alignment = UIControlContentVerticalAlignmentCenter
+    #st.background_color = color.default_blue
+    st.color = color.black
+    st.image_normal = icon_image(:ion, :ios_arrow_down, size: 28, color: color.black)
+    st.image_highlighted = icon_image(:ion, :ios_arrow_down, size: 28, color: color.black)
+  end
+
+
 
   def result_field(st)
     standard_form(st)
 
-    st.frame = {left: 10, from_right: 10, below_prev: 10, h: 130}
+    st.frame = {left: 10, from_right: 10, below_prev: 10, h: 90}
     st.z_position = 9
     st.font = font.standard
     st.background_color = color.white
@@ -115,7 +128,7 @@ class MainViewControllerStylesheet < ApplicationStylesheet
   def result_options(st)
     standard_form(st)
 
-    st.frame = {left: 0, top: st.prev_frame.y + st.prev_frame.height + 10, w: @screen[:width], h: 130}
+    st.frame = {left: 0, top: st.prev_frame.y + st.prev_frame.height + 10, w: @screen[:width], h: 170}
     st.corner_radius = 8
     st.background_color = color.white
     st.editable = false

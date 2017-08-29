@@ -11,7 +11,7 @@ class FlashcardController < UITableViewController
     #self.view.setEditing true, animated: true
 
     icon = icon_image(:awesome, :file_text, size: 24)
-    self.tabBarItem = UITabBarItem.alloc.initWithTitle("Flashcards", image: icon, tag: 1)
+    self.tabBarItem = UITabBarItem.alloc.initWithTitle("Exemplo", image: icon, tag: 1)
 
     self
   end

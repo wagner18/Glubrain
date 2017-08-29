@@ -34,6 +34,11 @@ class MainView < UIView
         #     App.alert("This field is invalid")
         # end
 
+        @clear_button = rmq_self.append(UIButton, :clear_button).tag(:main_form).on(:touch) do |sender|
+            rmq(:clear_button).animations.sink_and_throb
+            clean_source_field
+        end
+
         @translate_button = rmq_self.append(UIButton, :translate_button).tag(:main_form).on(:touch) do |sender|
             rmq(:translate_button).animations.sink_and_throb
             translate
@@ -92,6 +97,12 @@ class MainView < UIView
     def swap_language
         if self.delegate.respond_to?("swap_language")
             self.delegate.swap_language
+        end
+    end
+
+    def clean_source_field
+        if self.delegate.respond_to?("clean_source_field")
+            self.delegate.clean_source_field
         end
     end
 

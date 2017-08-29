@@ -27,27 +27,21 @@ class TestFormScreen < PM::XLFormScreen
             name: :email,
             type: :email,
             placeholder: 'Enter your email',
-            required: true,
-            validators: {
-              email: true
-            }
           },
           {
             title: 'Url',
             name: :url,
             type: :url,
-            placeholder: 'Enter an url',
-            required: true,
-            validators: {
-              url: true
-            }
+            placeholder: 'Enter an url'
+            #required: true,
+
           },
           {
             title: 'textView',
             name: :textview,
             type: :textview,
             placeholder: 'Enter a text',
-            required: true
+            #required: true
           },
           {
             title: 'Only letters',
@@ -55,14 +49,6 @@ class TestFormScreen < PM::XLFormScreen
             type: :text,
             validators: {
               regex: { regex: /^[a-zA-Z]+$/, message: 'Invalid name' }
-            }
-          },
-          {
-            title: 'One',
-            name: :only_one,
-            type: :text,
-            validators: {
-              custom: NumberValidator.new
             }
           },
           {

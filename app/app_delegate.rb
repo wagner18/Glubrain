@@ -7,9 +7,13 @@
 # //
 
 class AppDelegate
+
+  include CDQ
+
   attr_reader :window
 
   def application(application, didFinishLaunchingWithOptions:launchOptions)
+    cdq.setup
 
     mtranslator_init
 

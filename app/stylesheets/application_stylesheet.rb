@@ -40,6 +40,7 @@ class ApplicationStylesheet < RubyMotionQuery::Stylesheet
     color.add_named :translucent_white, color(hex: 'fff', a: 0.70)
     color.add_named :translucent_background, color(hex: 'fff', a: 0.40)
     color.add_named :battleship_gray,   '#7F7F7F'
+    color.add_named :translucent_high, color(hex: 'fff', a: 0.20)
 
     # Set other application-wide visual things, such as appearances:
     # SVProgressHUD.appearance.hudBackgroundColor = color.light_gray

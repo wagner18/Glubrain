@@ -12,124 +12,59 @@ class FlashcardScreen < PM::XLFormScreen
   stylesheet FlashcardScreenStylesheet
 
   form_options  required: :asterisks,
-                on_save: :'save_form:',
-                on_cancel: :cancel_form,
-                auto_focus: true
+                on_save: :'save_form:'
+                #on_cancel: :cancel_form,
+                #auto_focus: true
 
 
   # Form definition
   def form_data
 
-    subjects = [
-      { id: 'language', name: 'Languange' },
-      { id: 'math', name: 'Math' }
-    ]
-
     [
       {
-        title: 'Account information',
-        footer: 'Some help text',
+        title: 'Enter your flashcard informations',
+        footer: 'Set up your flashcard information with the question and the answer to be able schedule it as a riminder',
         #options: [:insert, :delete, :reorder],
         cells: [
           {
-            title: 'Subjects',
+            title: 'Question Label',
             name: :subjects,
             type: :selector_push,
-            appearance: appearance_style,
-            options: Hash[subjects.map do |subject|
-              [subject[:id], subject[:name]]
-            end]
+            view_controller_class: FlashcardQuestionLabelTable,
+            appearance: appearance_style
+            
+            # options: Hash[load_data.map do |subject|
+            #     [subject[:id], subject[:name]]
+            # end]
+            # on_change: -> (old_value, new_value) {
+            #   mp old_value: old_value,
+            #      new_value: new_value
+            # }
           },
           {
-            name: :textview,
-            type: :textview,
-            placeholder: 'Enter a text',
-            required: true
-          },
-          {
-            title: 'Only letters',
-            name: :letters,
-            type: :text,
-            appearance: appearance_style({
-                alignment: :right
-            }),
-            validators: {
-              regex: { regex: /^[a-zA-Z]+$/, message: 'Invalid name' }
-            }
-          },
-          {
-            title: 'One',
+            title: 'Question Object',
             name: :only_one,
             type: :text,
+            #required: true,
             appearance: appearance_style({
                 alignment: :right
-            }),
-            validators: {
-              custom: NumberValidator.new
-            }
+            })
           },
           {
-            title: 'Date an time',
-            name: :datetime,
-            type: :datetime_inline,
-            appearance: appearance_style,
-            properties: {
-              min: NSDate.new
-            }
-          },
-          {
-            title: 'Click me',
-            name: :click_me,
-            type: :button,
-            appearance: appearance_style,
-            on_click: -> (cell) {
-              mp "You clicked me"
-            }
-          },
-          {
-            title: 'Yes ?',
-            name: 'check',
-            type: :switch,
-            appearance: appearance_style,
-          },
-          {
-            title: 'Image',
-            name: 'image',
-            type: :text,
-            image: "user",
-            # appearance: appearance_style,
-          },
-          {
-            title: 'Options',
-            name: 'options',
-            type: :selector_push,
-            appearance: appearance_style,
-            options: Hash[subjects.map do |subject|
-              [subject[:id], subject[:name]]
-            end],
-            value: 'value_1',
-            on_change: -> (old_value, new_value) {
-              mp old_value: old_value,
-                 new_value: new_value
-            }
-          },
-          {
-            title: 'iPad Options',
-            name: 'ipad_options',
-            type: :selector_popover,
-            appearance: appearance_style,
-            options: Hash[subjects.map do |subject|
-              [subject[:id], subject[:name]]
-            end],
-            value: 'value_1',
+            # title: "Question answer",
+            name: :description,
+            type: :textview,
+            placeholder: 'Enter your question answer'
+            #required: true
           }
-
         ]
       },
 
-
+      # Set the image cell to add image
       {
-        name: 'images',
+        title: '',
+        name: 'Media',
+        #options: [:insert, :delete, :reorder],
         cells: [
           {
             title: 'An image',
@@ -137,19 +72,101 @@ class FlashcardScreen < PM::XLFormScreen
             type: :image,
             appearance: appearance_style,
             value: UIImage.imageNamed('icon-512@2x.png')
+          },
+          {
+            title: 'Audio record',
+            name: :audio_record,
+            type: :image,
+            appearance: appearance_style,
+            value: UIImage.imageNamed('icon-512@2x.png')
           }
         ]
       },
+
+      # Schedule section
+
+      {
+        title: 'Remind Schedule',
+        footer: 'Some help text',
+        #options: [:insert, :delete, :reorder],
+        cells: [
+           {
+            title: 'Daily Frequency',
+            name: :note_frequency,
+            type: :selector_picker_view_inline,
+            appearance: appearance_style,
+            value: 'Once a day',
+            options: {
+              :one => "Once a day",
+              :two => "Twice a day",
+              :three => "Three times a day",
+              :four => "Four times a day",
+            }
+
+          },
+          {
+            title: 'Remind me',
+            name: :repeat_frequency,
+            type: :multiple_selector,
+            appearance: appearance_style,
+            #value: "Never",
+            options: {
+              :sunday => "Every Day",
+              :monday => "Every Week",
+              :tuesday => "Every 2 Weeks",
+              :wednesday => "Every Month",
+              :wednesday => "Every Year"
+            }
+
+          },
+          {
+            title: 'Stop Remind',
+            name: :stop_remind,
+            type: :selector_push,
+            appearance: appearance_style,
+            cells: [
+              {
+                title: 'Repeat Forever',
+                name: :reapet_forever,
+                type: :check,
+                value: true,
+                appearance: appearance_style
+              },
+              {
+                title: 'Stop date',
+                name: :stop_remind_date,
+                type: :date_inline,
+                appearance: appearance_style
+              }
+            ]
+          },
+          {
+            title: 'Turn off?',
+            name: 'rimind_on',
+            type: :switch,
+            value: true, 
+            appearance: appearance_style
+          }
+
+        ]
+      }
 
     ]
 
   end
 
+  def load_data
+    subjects = [
+      { id: '1', name: "what's means?" },
+      { id: '2', name: "What's the translation of the word below?" }
+    ]
+  end
+
 
   def save_form(values)
     dismiss_keyboard
-    #mp on_save: values
-    puts values
+    puts values.inspect
+    mp on_save: values
   end
 
   def cancel_form
@@ -161,7 +178,7 @@ class FlashcardScreen < PM::XLFormScreen
       font: UIFont.fontWithName('Helvetica Neue', size: 16.0),
       detail_font: UIFont.fontWithName('Helvetica Neue', size: 16.0),
       color: UIColor.grayColor,
-      detail_color: UIColor.whiteColor,
+      detail_color: UIColor.blackColor,
       background_color: color.translucent_background,# UIColor.darkGrayColor
     }
 
@@ -173,31 +190,17 @@ class FlashcardScreen < PM::XLFormScreen
 end
 
 
-class TestValueTransformer < ProMotion::ValueTransformer
 
-  def transformedValue(value)
-    return nil if value.nil?
+class CustomCell < PM::XLFormCell
 
-    str = []
-    str << value['first_text'] if value['first_text']
-    str << value['second_text'] if value['second_text']
+  def initWithStyle(style, reuseIdentifier: reuse_identifier)
+    super
 
-    str.join(',')
+    rmq_self = rmq(self)
+    rmq_self.apply_style :custom_cell
+
+    self
   end
-end
-
-class NumberValidator < ProMotion::Validator
-  def initialize
-    @message = "Only 1 !!!"
-  end
-
-  def valid?(row)
-    return nil if row.nil? or row.value.nil?
-    row.value == "1"
-  end
-end
-
-class MyCustomCell < PM::XLFormCell
 
   def update
     super

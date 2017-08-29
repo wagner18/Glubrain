@@ -151,6 +151,12 @@ class MainViewController < UIViewController
 
   end
 
+  # Clean the source field
+  def clean_source_field
+    source_field = rmq(:source_field).get
+    source_field.text = ""
+  end
+
   # Translate the given text using Mycrosoft API and AFMotion
   def translate
 
@@ -276,7 +282,7 @@ class MainViewController < UIViewController
   end
 
   def schedule_flashcard
-    test_screen = TestFormScreen.new(nav_bar: true)
+    test_screen = FlashcardQuestionLabelTable.new(nav_bar: true)
     self.navigationController.pushViewController(test_screen, animated:true)
   end
 

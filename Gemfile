@@ -12,6 +12,9 @@ gem 'afmotion'
 gem 'ProMotion-XLForm'
 #gem 'ruby_motion_query'
 
+# Core Data library
+gem 'cdq'
+
 gem 'moticons'
 
 #gem 'newclear'

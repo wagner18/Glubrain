@@ -10,11 +10,11 @@ class MainController < UITabBarController
     # flash_cards_controller = FlashCardsController.alloc.initWithNibName(nil, bundle: nil)
     # flash_cards_navigation = UINavigationController.alloc.initWithRootViewController(flash_cards_controller)
 
-    flash_cards_controller = FlashcardController.alloc.initWithStyle(UITableViewStyleGrouped)
-    flash_cards_navigation = UINavigationController.alloc.initWithRootViewController(flash_cards_controller)
-
     flashcard_screen = FlashcardScreen.new
     flashcard_navigation = UINavigationController.alloc.initWithRootViewController(flashcard_screen)
+
+    flash_cards_controller = FlashcardController.alloc.initWithStyle(UITableViewStyleGrouped)
+    flash_cards_navigation = UINavigationController.alloc.initWithRootViewController(flash_cards_controller)
 
     list_controller = HomescreenController.alloc.initWithNibName(nil, bundle: nil)
     #list_controller.title = "List"

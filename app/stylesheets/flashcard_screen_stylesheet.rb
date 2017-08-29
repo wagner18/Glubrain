@@ -24,10 +24,14 @@ class FlashcardScreenStylesheet < ApplicationStylesheet
   end
 
   def form_view(st)
-    st.background_color = color.translucent_white
+    st.background_color = color.translucent_background
   end
 
   def subjects(st)
+    st.background_color = color.black#translucent_white 
+  end
+
+  def custom_cell(st)
     st.background_color = color.black#translucent_white 
   end
 
